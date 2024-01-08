@@ -2,7 +2,7 @@ import Button from "./Button"
 
 function FormAddFriend() {
   return (
-    <form>
+    <form className="form-add-friend">
       <label>👩‍🤝‍🧑 Friend name</label>
       <input type="text" />
 
