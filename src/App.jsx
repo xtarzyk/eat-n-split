@@ -1,3 +1,5 @@
+import Button from './Button';
+import FormAddFriend from './FormAddFriend';
 import FriendsList from './FriendsList';
 
 
@@ -7,6 +9,8 @@ function App() {
     <div className='app'>
       <div className='sidebar'>
         <FriendsList />
+        <FormAddFriend />
+        <Button>Add friend</Button>
       </div>
       
     </div>
