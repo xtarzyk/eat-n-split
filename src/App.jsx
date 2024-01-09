@@ -3,25 +3,37 @@ import Button from "./Button";
 import FormAddFriend from "./FormAddFriend";
 import FormSplitBill from "./FormSplitBill";
 import FriendsList from "./FriendsList";
-import { initialFriends } from './initialFriends';
+import { initialFriends } from "./initialFriends";
 
 function App() {
-  const [friends, setFriends] = useState(initialFriends)
+  const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   function handleShowAddFriend() {
     setShowAddFriend((show) => !show);
   }
 
   function handleAddFriend(friend) {
-    setFriends(friends => [...friends, friend])
-    setShowAddFriend(false)
+    setFriends((friends) => [...friends, friend]);
+    setShowAddFriend(false);
+  }
+
+  function handleSelection(friend) {
+    setSelectedFriend((selected) =>
+      selected?.id === friend.id ? null : friend
+    );
+    setShowAddFriend(false);
   }
 
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendsList friends={friends} />
+        <FriendsList
+          friends={friends}
+          handleSelection={handleSelection}
+          selectedFriend={selectedFriend}
+        />
         {showAddFriend && <FormAddFriend handleAddFriend={handleAddFriend} />}
 
         <Button onClick={handleShowAddFriend}>
@@ -29,7 +41,7 @@ function App() {
         </Button>
       </div>
 
-      <FormSplitBill />
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
     </div>
   );
 }
